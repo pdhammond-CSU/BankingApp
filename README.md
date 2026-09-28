@@ -1,2 +1,2 @@
-# BankAccount
-Java bank account inheritance assignment with BankAccount, CheckingAccount, and a test class.
+# Banking Application
+Java bank account application inheritance assignment with BankAccount superclass, CheckingAccount subclass, and a test class.
