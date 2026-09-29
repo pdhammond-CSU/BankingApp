@@ -1,21 +1,22 @@
 public class BankAccount {
 	
+	// required fields
 	private String firstName;
 	private String lastName;
 	private int accountID;
 	private double balance;
 
-	// constructor() - initialize balance to zero
+	// initialize balance to zero
     public BankAccount() {
     	balance = 0.0;
     }
     
-    // deposit() - will accept a single value double parameter; the parameter 'amount' is added to the existing balance
+    // will accept a single value double parameter; the parameter 'amount' is added to the existing balance
     public void deposit(double amount) {
     	balance = balance + amount;
     }
     
-    // withdrawal() - accepts a single value double dollar amount; the parameter 'amount' is subtracted from the existing balance
+    // accepts a single value double dollar amount; the parameter 'amount' is subtracted from the existing balance
     public void withdrawal(double amount) {
     	balance = balance - amount;
     }
