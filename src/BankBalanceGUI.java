@@ -54,24 +54,49 @@ public class BankBalanceGUI implements ActionListener {
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	frame.setVisible(true);
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent event) {
-    	if (event.getSource() == showBalanceButton) {
-        	try {
-            	balance = Double.parseDouble(amountField.getText());
+        try {
+            if (event.getSource() == showBalanceButton) {
+                balance = Double.parseDouble(amountField.getText());
 
-            	balanceLabel.setText(String.format("$%.2f", balance));
+                balanceLabel.setText(String.format("$%.2f", balance));
 
-            	amountField.setText("");
-            } catch (NumberFormatException e) {
-            	JOptionPane.showMessageDialog(
-            	    	frame,
-            	    	"Please enter a valid dollar amount."
-            	);
+                amountField.setText("");
             }
+
+            if (event.getSource() == depositButton) {
+                double depositAmount =
+                        Double.parseDouble(amountField.getText());
+
+                if (depositAmount > 0) {
+                    balance = balance + depositAmount;
+
+                    balanceLabel.setText(String.format(
+                            "$%.2f", balance));
+
+                    amountField.setText("");
+
+                    JOptionPane.showMessageDialog(
+                            frame,
+                            "Deposit completed."
+                    );
+                } else {
+                    JOptionPane.showMessageDialog(
+                            frame,
+                            "Enter a deposit amount greater than zero."
+                    );
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Please enter a valid dollar amount."
+            );
         }
-	}
+    }
     
     public static void main(String[] args) {
     	new BankBalanceGUI();
