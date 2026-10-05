@@ -66,14 +66,9 @@ public class BankBalanceGUI implements ActionListener {
         try {
         	// Sets and displays the starting balance.
             if (event.getSource() == showBalanceButton) {
-            	if(balance!=0) {
+            	if(balance>=0) {
             		balanceLabel.setText(String.format("$%.2f", balance));
 
-                    amountField.setText("");
-            	} else{
-            		balance = Double.parseDouble(amountField.getText());
-            		
-            		balanceLabel.setText(String.format("$%.2f", balance));
                     amountField.setText("");
             	}
             }
