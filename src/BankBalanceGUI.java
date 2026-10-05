@@ -28,7 +28,7 @@ public class BankBalanceGUI implements ActionListener {
     	amountField = new JTextField();
 
     	JLabel balanceText = new JLabel("Current Balance:");
-    	balanceLabel = new JLabel("$0.00");
+    	balanceLabel = new JLabel("");
 
     	showBalanceButton = new JButton("Show Balance");
     	depositButton = new JButton("Deposit");
@@ -36,6 +36,7 @@ public class BankBalanceGUI implements ActionListener {
     	exitButton = new JButton("Exit");
 
     	showBalanceButton.addActionListener(this);
+    	depositButton.addActionListener(this);
     	
     	panel.add(amountLabel);
     	panel.add(amountField);
@@ -59,11 +60,18 @@ public class BankBalanceGUI implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         try {
             if (event.getSource() == showBalanceButton) {
-                balance = Double.parseDouble(amountField.getText());
+            	
+            	if(balance!=0) {
+            		balanceLabel.setText(String.format("$%.2f", balance));
 
-                balanceLabel.setText(String.format("$%.2f", balance));
+                    amountField.setText("");
+            	}
+            	else{
+            		balance = Double.parseDouble(amountField.getText());
+            		 balanceLabel.setText(String.format("$%.2f", balance));
 
-                amountField.setText("");
+                     amountField.setText("");
+            	}
             }
 
             if (event.getSource() == depositButton) {
@@ -73,9 +81,7 @@ public class BankBalanceGUI implements ActionListener {
                 if (depositAmount > 0) {
                     balance = balance + depositAmount;
 
-                    balanceLabel.setText(String.format(
-                            "$%.2f", balance));
-
+                    balanceLabel.setText("");
                     amountField.setText("");
 
                     JOptionPane.showMessageDialog(
