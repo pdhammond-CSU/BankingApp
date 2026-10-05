@@ -1,24 +1,42 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BankBalanceGUI {
+public class BankBalanceGUI implements ActionListener {
+	
+	private JFrame frame;
+    private JPanel panel;
 
-    public static void main(String[] args) {
-    	JFrame frame = new JFrame("Bank Balance Application");
+    private JTextField amountField;
+    private JLabel balanceLabel;
+
+    private JButton showBalanceButton;
+    private JButton depositButton;
+    private JButton withdrawButton;
+    private JButton exitButton;
+
+    private double balance = 0.0;
+    
+    public BankBalanceGUI() {
     	
-    	JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+    	frame = new JFrame("Bank Balance Application");
 
+    	panel = new JPanel(new GridLayout(4, 2, 10, 10));
+    	
     	JLabel amountLabel = new JLabel("Enter an amount:");
-    	JTextField amountField = new JTextField();
+    	amountField = new JTextField();
 
     	JLabel balanceText = new JLabel("Current Balance:");
-    	JLabel balanceLabel = new JLabel("$0.00");
+    	balanceLabel = new JLabel("$0.00");
 
-    	JButton showBalanceButton = new JButton("Show Balance");
-    	JButton depositButton = new JButton("Deposit");
-    	JButton withdrawButton = new JButton("Withdraw");
-    	JButton exitButton = new JButton("Exit");
+    	showBalanceButton = new JButton("Show Balance");
+    	depositButton = new JButton("Deposit");
+    	withdrawButton = new JButton("Withdraw");
+    	exitButton = new JButton("Exit");
 
+    	showBalanceButton.addActionListener(this);
+    	
     	panel.add(amountLabel);
     	panel.add(amountField);
 
@@ -35,5 +53,27 @@ public class BankBalanceGUI {
     	frame.setSize(400, 250);
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+    	if (event.getSource() == showBalanceButton) {
+        	try {
+            	balance = Double.parseDouble(amountField.getText());
+
+            	balanceLabel.setText(String.format("$%.2f", balance));
+
+            	amountField.setText("");
+            } catch (NumberFormatException e) {
+            	JOptionPane.showMessageDialog(
+            	    	frame,
+            	    	"Please enter a valid dollar amount."
+            	);
+            }
+        }
+	}
+    
+    public static void main(String[] args) {
+    	new BankBalanceGUI();
     }
 }
