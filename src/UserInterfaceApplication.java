@@ -19,10 +19,18 @@ public class UserInterfaceApplication implements ActionListener {
 
 	private final Random random = new Random();
 
-	// Builds the application window and menu.
+	// Builds the application using separate setup methods.
 	public UserInterfaceApplication() {
 		JFrame frame = new JFrame("User Interface Application");
 
+		frame.setJMenuBar(createMenuBar());
+		configureTextBox(frame);
+		configureWindow(frame);
+	}
+	
+	// Creates the menu bar and connects the menu options.
+	private JMenuBar createMenuBar() {
+		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu menu = new JMenu("Options");
 
@@ -44,11 +52,8 @@ public class UserInterfaceApplication implements ActionListener {
 		menu.add(exitItem);
 
 		menuBar.add(menu);
-		frame.setJMenuBar(menuBar);
 
-		// Delegates the remaining setup to separate methods.
-		configureTextBox(frame);
-		configureWindow(frame);
+		return menuBar;
 	}
 
 	// Creates the text box and adds it to the window.
