@@ -7,7 +7,7 @@ public class CheckingAccount extends BankAccount {
 		this.interestRate = interestRate;
 	}
 	
-	// will withdraw amount given and display a negative balance (if needed) that includes a $30 overdraft fee and denotes that a fee has been assessed
+	// Withdraws amount given and display a negative balance (if needed) that includes a $30 overdraft fee and denotes that a fee has been assessed
 	public void processWithdrawal(double amount) {
 		withdrawal(amount);
 		
@@ -17,7 +17,7 @@ public class CheckingAccount extends BankAccount {
 		}
 	}
 	
-	// should display all superclass attributes and provide an additional interest rate
+	// Should display all superclass attributes and provide an additional interest rate
 	public void displayAccount() {
     	accountSummary();
     	System.out.printf("Interest Rate: %.2f%%%n", interestRate);
