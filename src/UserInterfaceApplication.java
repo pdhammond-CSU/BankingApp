@@ -19,7 +19,7 @@ public class UserInterfaceApplication implements ActionListener {
 
 	private final Random random = new Random();
 
-	// Builds the application window, menu, and text box.
+	// Builds the application window and menu.
 	public UserInterfaceApplication() {
 		JFrame frame = new JFrame("User Interface Application");
 
@@ -43,17 +43,24 @@ public class UserInterfaceApplication implements ActionListener {
 		menu.add(colorItem);
 		menu.add(exitItem);
 
-		// Places the Options menu in the top menu bar.
 		menuBar.add(menu);
 		frame.setJMenuBar(menuBar);
 
-		// Creates a read-only text box for displaying information.
+		// Delegates the remaining setup to separate methods.
+		configureTextBox(frame);
+		configureWindow(frame);
+	}
+
+	// Creates the text box and adds it to the window.
+	private void configureTextBox(JFrame frame) {
 		textBox = new JTextArea();
 		textBox.setEditable(false);
 
 		frame.add(new JScrollPane(textBox), BorderLayout.CENTER);
+	}
 
-		// Sets the window size, close behavior, and screen position.
+	// Sets the window size, close behavior, and screen position.
+	private void configureWindow(JFrame frame) {
 		frame.setSize(500, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -91,7 +98,7 @@ public class UserInterfaceApplication implements ActionListener {
 		try (FileWriter writer = new FileWriter(logFile)) {
 			writer.write(textBox.getText());
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(textBox, "Unable to save log.txt: " + e.getMessage());
+			JOptionPane.showMessageDialog(textBox,"Unable to save log.txt: " + e.getMessage());
 			return;
 		}
 
